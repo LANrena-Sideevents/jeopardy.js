@@ -1,7 +1,15 @@
 $(document).ready(function() {
     $('table#game').hide();
     $('tbody tr td').each(function() {
-        $(this).addClass('cell').addClass('clean');
+        $(this).addClass('cell')
+               .addClass('clean')
+               .click(function() {
+            prompt.show($(this));
+        });
+    });
+
+    $('tbody tr td lr-answer, tbody tr td lr-question').each(function() {
+        $(this).hide();
     });
 
 	$('textarea.edit').autogrow();
@@ -72,39 +80,35 @@ game.createScoreboard = function()
 
 }
 
-game.addPoints = function(team)
-{	
-	var points = parseInt($('#team' + team).html()) + game.current_points;
-
-	$('#team' + team).html(points);
-	$(('#t' + game.current_questionID)).addClass("dirty");
-
-	$(('#t' + game.current_questionID)).unbind('mouseover')
-	$(('#t' + game.current_questionID)).unbind('mouseout')	
+game.addPoints = function(team) {	
+	game.updatePoints(team, game.current_points);
 }
 
-game.subtractPoints = function(team)
-{
-	var points = parseInt($('#team' + team).html()) - game.current_points;
-	
-	$('#team' + team).html(points);
-	$(('#t' + game.current_questionID)).addClass("dirty");	
-	$(('#t' + game.current_questionID)).unbind('mouseover')
-	$(('#t' + game.current_questionID)).unbind('mouseout')	
+game.subtractPoints = function(team) {
+	var points = 0-game.current_points;
+	game.updatePoints(team, points);
+}
+
+game.updatePoints = function (team, diff) {
+    var points = parseInt($('#team' + team).html()) + diff;
+
+    $('#team' + team).html(points);
+	game.current_questionID.addClass("dirty")
+	    .unbind('mouseover')
+	    .unbind('mouseout');
 }
 
 var prompt = {}
-prompt.show = function(questionID, points)
-{
-	game.current_points = points
-	game.current_questionID = questionID
-	$('#question').hide()
-	$('#game').hide()
-	$('#prompt').fadeIn(1000)
-	$('#question').html($('#' + questionID).html())
-	$('#answer').html($('#a' + questionID).html())
+prompt.show = function(field) {
+	game.current_points = parseInt(field.find('lr-value').text());
+	game.current_questionID = field;
+	$('#question').hide();
+	$('#game').hide();
+	$('#prompt').fadeIn(1000);
+	$('#answer').html(field.find('lr-question').html());
+	$('#question').html(field.find('lr-answer').html());
 	if($('#question').html().length == 0)
-		$('#correct-response').hide()
+		$('#correct-response').hide();
 	else
 		$('#correct-response').show();
 }
