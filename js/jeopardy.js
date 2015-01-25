@@ -1,4 +1,10 @@
 $(document).ready(function() {
+    initializeOptions();
+
+    $('body').append('<div id="stats"></div>');
+
+    initializePrompt();
+
     $('table#game').hide();
     $('tbody tr td').each(function() {
         $(this).addClass('cell')
@@ -34,6 +40,30 @@ $(document).ready(function() {
 			$(this).removeClass('ie-hack')
 		})	
 });
+
+function initializeOptions() {
+    var teams = '<select name="teams" id="teams">';
+    teams += '<option value="1">1 team</option>';
+    for(var i = 2; i<=5; i++) {
+        teams += '<option value="' + i + '">' + i + ' teams</option>';
+    }
+
+    var options = $('<div id="options"></div>').html(
+	    $('<h1>' + document.title + '</h1>')
+	    .append('<label>Number of Teams</label>')
+	    .append(teams)
+	    .append('<input class="submit" type="button" id="submit" value="Start" onclick="game.init()" />')
+	    .append('<div class="clear"></div>'));
+    $('body').append(options);
+}
+
+function initializePrompt() {
+    var prompt = $('<div id="prompt"></div>')
+        .append('<h2 id="answer"></h2>')
+	    .append('<p><span id="correct-response"><a href="javascript:prompt.showQuestion()">Correct Response</a> &nbsp;&nbsp;&nbsp;&nbsp; </span><a href="javascript:prompt.hide()">Continue</a></p>')
+	    .append('<h2 id="question"></h2>');
+    $("body").append(prompt);
+}
 
 var modal = {}
 modal.show = function(questionID)
