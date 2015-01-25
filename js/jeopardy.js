@@ -1,5 +1,8 @@
-$(document).ready(function(){
+$(document).ready(function() {
     $('table#game').hide();
+    $('tbody tr td').each(function() {
+        $(this).addClass('cell').addClass('clean');
+    });
 
 	$('textarea.edit').autogrow();
 	
@@ -72,7 +75,7 @@ game.createScoreboard = function()
 game.addPoints = function(team)
 {	
 	var points = parseInt($('#team' + team).html()) + game.current_points;
-	
+
 	$('#team' + team).html(points);
 	$(('#t' + game.current_questionID)).addClass("dirty");
 
