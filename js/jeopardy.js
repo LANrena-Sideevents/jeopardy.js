@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    $('table#game').hide();
+
 	$('textarea.edit').autogrow();
 	
 	$('textarea.edit').focus(function(){
@@ -46,7 +48,7 @@ game.init = function()
 	$('#stats').show()
 	game.team_cnt = $('#teams').val()
 	game.createScoreboard()
-        game.current_points = 0;
+    game.current_points = 0;
 }
 
 game.createScoreboard = function()
