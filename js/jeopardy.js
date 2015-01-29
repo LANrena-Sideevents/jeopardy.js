@@ -148,12 +148,10 @@ daily.show = function(field) {
     $('#prompt').hide();
     $('#daily').show();
 
-    $('#daily').find("input").each(function() {
-        $(this).click(function() {
-            game.points_bet = $(this).val();
-            game.current_points = game.points_bet;
-            prompt.show(field);
-            $('#daily').hide();
-        });
+    $('#bet_submit').click(function() {
+        game.points_bet = $("#bet").val();
+        game.current_points = game.points_bet;
+        prompt.show(field);
+        $('#daily').hide();
     });
 }
