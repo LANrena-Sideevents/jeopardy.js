@@ -6,19 +6,27 @@ game.init = function() {
     $('#options').hide();
     $('#stats').show();
 
-    game.team_cnt = $('#teams').val()
+    game.teams = [];
+    $(".team").each(function() {
+        game.teams.push({
+            "name": $(this).val(),
+            "points": 0
+        });
+    });
     game.createScoreboard()
     game.current_points = 0;
 }
 
 game.createScoreboard = function() {
 	var content = "<table cellspacing=10><tbody><tr>";
-	for(var i = 1; i <= game.team_cnt; i++) {
-		content += "<th><h3>Team " + i + "</h3></th>";
+	for(var i = 0; i < game.teams.length; i++) {
+		content += "<th><h3>" + game.teams[i]["name"] + "</h3></th>";
 	}
 	content += "</tr><tr>";
-	for(var i = 1; i <= game.team_cnt; i++) {
-		content += "<td><h3 id='team" + i +"'>0</h3><input class='add-points' onclick='game.addPoints(" + i +  ")' value='+' type='button' /> <input class='subtract-points' onclick='game.subtractPoints(" + i +  ")' type='button' value='-' /></td>";
+	for(var i = 0; i < game.teams.length; i++) {
+		content += "<td><h3 id='team" + i +"'>0</h3>"
+            + "<input class='add-points' onclick='game.addPoints(" + i + ")' value='+' type='button' />"
+            + "<input class='subtract-points' onclick='game.subtractPoints(" + i + ")' type='button' value='-' /></td>";
 	}
 	content += "</tr></tbody></table>";
 	$('#stats').html(content);
@@ -34,9 +42,9 @@ game.subtractPoints = function(team) {
 }
 
 game.updatePoints = function (team, diff) {
-    var points = parseInt($('#team' + team).html()) + diff;
+    game.teams[team]['points'] += diff;
 
-    $('#team' + team).html(points);
+    $('#team' + team).html(game.teams[team]['points']);
 	$('#' + game.current_questionID).addClass("dirty")
 	    .unbind('mouseover')
 	    .unbind('mouseout');
