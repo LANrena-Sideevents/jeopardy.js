@@ -121,11 +121,22 @@ prompt.show = function(field) {
 	game.current_questionID = field.attr("id");
     var column = game.current_questionID.substring(0, 2);
     var dataset = game.gamedata[column][game.current_questionID];
+
+    var question = dataset['question'];
+    if (question.substring(0, 6) == "image:") {
+        question = "<img src=\"" + question.substring(6) + "\">";
+    }
+
+    var answer = dataset['answer'];
+    if (answer.substring(0, 6) == "image:") {
+        answer = "<img src=\"" + answer.substring(6) + "\">";
+    }
+
 	$('#question').hide();
 	$('#game').hide();
 	$('#prompt').fadeIn(1000);
-	$('#answer').html(dataset['question']);
-	$('#question').html(dataset['answer']);
+	$('#answer').html(question);
+	$('#question').html(answer);
 	if($('#question').html().length == 0)
 		$('#correct-response').hide();
 	else
