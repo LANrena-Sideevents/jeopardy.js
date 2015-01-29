@@ -1,12 +1,11 @@
 var game = {}
 game.init = function() {
-    if (game.gamedata == null) {
-        return;
-    }
+    if (game.gamedata == null) return;
 
     $('#game').fadeIn(1000);
     $('#options').hide();
     $('#stats').show();
+
     game.team_cnt = $('#teams').val()
     game.createScoreboard()
     game.current_points = 0;
@@ -43,6 +42,19 @@ game.updatePoints = function (team, diff) {
 	    .unbind('mouseout');
 }
 
+game.loadFile = function(onload) {
+    if (typeof window.FileReader !== 'function') {
+      return;
+    }
+
+    var input = document.getElementById('fileinput');
+    if (input && input.files && input.files[0]) {
+      var fr = new FileReader();
+      fr.onload = onload;
+      fr.readAsText(input.files[0]);
+    }
+}
+
 $(document).ready(function() {
     $('tbody tr td').each(function() {
         $(this).addClass('cell')
@@ -52,29 +64,23 @@ $(document).ready(function() {
         });
     });
 
-	$('textarea.edit').autogrow();
-
 	$('textarea.edit').focus(function(){
 		$(this).addClass('active');
 		var val = $(this).val();
 		if(val == "Enter Category" || val == "Enter Title")
 			this.select();
-	})
-
-	$('textarea.edit').blur(function(){
+	}).blur(function(){
 		$(this).removeClass('active');
-	})	
+	}).autogrow();
 
 	$('.clean').mouseover(function(){
 		$(this).addClass('ie-hack')
-	})
-
-	$('.clean').mouseout(function(){
+	}).mouseout(function(){
 		$(this).removeClass('ie-hack')
 	})
 
     $('#fileinput').change(function () {
-        loadFile(function(e) {
+        game.loadFile(function(e) {
             var data = $.parseJSON(e.target.result);
             $('#title').html(data["name"]);
             $('#gametitle').html(data["name"]);
@@ -102,36 +108,14 @@ modal.save = function() {
 	$('#a' + modal.activeID).val($('#answer').val())
 }
 
-function loadFile(onload) {
-    if (typeof window.FileReader !== 'function') {
-      return;
-    }
-
-    var input = document.getElementById('fileinput');
-    if (input && input.files && input.files[0]) {
-      var fr = new FileReader();
-      fr.onload = onload;
-      fr.readAsText(input.files[0]);
-    }
-}
-
 var prompt = {}
 prompt.show = function(field) {
 	game.current_points = parseInt(field.find('h3').text());
 	game.current_questionID = field.attr("id");
     var column = game.current_questionID.substring(0, 2);
-    var prefix = game.gamedata['directory'];
     var dataset = game.gamedata[column][game.current_questionID];
-
-    var question = dataset['question'];
-    if (question.substring(0, 6) == "image:") {
-        question = "<img src=\"data/" + prefix + "/" + question.substring(6) + "\">";
-    }
-
-    var answer = dataset['answer'];
-    if (answer.substring(0, 6) == "image:") {
-        answer = "<img src=\"data/" + prefix + "/" + answer.substring(6) + "\">";
-    }
+    var question = prompt.loadImage(dataset['question']);
+    var answer = prompt.loadImage(dataset['answer']);
 
 	$('#question').hide();
 	$('#game').hide();
@@ -142,6 +126,14 @@ prompt.show = function(field) {
 		$('#correct-response').hide();
 	else
 		$('#correct-response').show();
+}
+
+prompt.loadImage = function(image) {
+    var prefix = game.gamedata['directory'];
+    if (image.substring(0, 6) == "image:") {
+        return "<img src=\"data/" + prefix + "/" + image.substring(6) + "\">";
+    }
+    return image;
 }
 
 prompt.hide = function() {
