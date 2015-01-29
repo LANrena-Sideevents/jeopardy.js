@@ -1,95 +1,148 @@
 <!doctype html>
 <html>
-    <head>
-		<title>LANrena Jeopardy</title>
-		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-		<link rel="stylesheet" href="css/game.css" type="text/css" />
-		<link rel="stylesheet" href="css/jeopardy.css" type="text/css" />
-		<script src="js/jquery-2.1.3.min.js"></script>
-		<script src="js/expanding-textarea-1.2.2.min.js"></script>
-		<script src="js/jquery.simplemodal.1.4.4.min.js"></script>
-		<script src="js/jeopardy.js"></script>
-    </head>
 
-    <body>
-		<table id="game">
-			<thead>
-				<tr>
-					<th id="gametitle" colspan="5"></th>
-				</tr>
-				<tr>
-					<th id="c1"></th>
-					<th id="c2"></th>
-					<th id="c3"></th>
-					<th id="c4"></th>
-					<th id="c5"></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td id="c1r1"><h3>100</h3></td>
-					<td id="c2r1"><h3>100</h3></td>
-					<td id="c3r1"><h3>100</h3></td>
-					<td id="c4r1"><h3>100</h3></td>
-					<td id="c5r1"><h3>100</h3></td>
-				</tr>
-				<tr>
-					<td id="c1r2"><h3>200</h3></td>
-					<td id="c2r2"><h3>200</h3></td>
-					<td id="c3r2"><h3>200</h3></td>
-					<td id="c4r2"><h3>200</h3></td>
-					<td id="c5r2"><h3>200</h3></td>
-				</tr>
-				<tr>
-					<td id="c1r3"><h3>300</h3></td>
-					<td id="c2r3"><h3>300</h3></td>
-					<td id="c3r3"><h3>300</h3></td>
-					<td id="c4r3"><h3>300</h3></td>
-					<td id="c5r3"><h3>300</h3></td>
-				</tr>
-				<tr>
-					<td id="c1r4"><h3>400</h3></td>
-					<td id="c2r4"><h3>400</h3></td>
-					<td id="c3r4"><h3>400</h3></td>
-					<td id="c4r4"><h3>400</h3></td>
-					<td id="c5r4"><h3>400</h3></td>
-				</tr>
-				<tr>
-					<td id="c1r5"><h3>500</h3></td>
-					<td id="c2r5"><h3>500</h3></td>
-					<td id="c3r5"><h3>500</h3></td>
-					<td id="c4r5"><h3>500</h3></td>
-					<td id="c5r5"><h3>500</h3></td>
-				</tr>
-			</tbody>
-		</table>
+<head>
+    <title>LANrena Jeopardy</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="css/game.css" type="text/css" />
+    <link rel="stylesheet" href="css/jeopardy.css" type="text/css" />
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="js/expanding-textarea-1.2.2.min.js"></script>
+    <script src="js/jquery.simplemodal.1.4.4.min.js"></script>
+    <script src="js/jeopardy.js"></script>
+</head>
 
-		<div id="options">
-			<h1 id="title"></h1>
+<body>
+    <table id="game">
+        <thead>
+            <tr>
+                <th id="gametitle" colspan="5"></th>
+            </tr>
+            <tr>
+                <th id="c1"></th>
+                <th id="c2"></th>
+                <th id="c3"></th>
+                <th id="c4"></th>
+                <th id="c5"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td id="c1r1">
+                    <h3>100</h3>
+                </td>
+                <td id="c2r1">
+                    <h3>100</h3>
+                </td>
+                <td id="c3r1">
+                    <h3>100</h3>
+                </td>
+                <td id="c4r1">
+                    <h3>100</h3>
+                </td>
+                <td id="c5r1">
+                    <h3>100</h3>
+                </td>
+            </tr>
+            <tr>
+                <td id="c1r2">
+                    <h3>200</h3>
+                </td>
+                <td id="c2r2">
+                    <h3>200</h3>
+                </td>
+                <td id="c3r2">
+                    <h3>200</h3>
+                </td>
+                <td id="c4r2">
+                    <h3>200</h3>
+                </td>
+                <td id="c5r2">
+                    <h3>200</h3>
+                </td>
+            </tr>
+            <tr>
+                <td id="c1r3">
+                    <h3>300</h3>
+                </td>
+                <td id="c2r3">
+                    <h3>300</h3>
+                </td>
+                <td id="c3r3">
+                    <h3>300</h3>
+                </td>
+                <td id="c4r3">
+                    <h3>300</h3>
+                </td>
+                <td id="c5r3">
+                    <h3>300</h3>
+                </td>
+            </tr>
+            <tr>
+                <td id="c1r4">
+                    <h3>400</h3>
+                </td>
+                <td id="c2r4">
+                    <h3>400</h3>
+                </td>
+                <td id="c3r4">
+                    <h3>400</h3>
+                </td>
+                <td id="c4r4">
+                    <h3>400</h3>
+                </td>
+                <td id="c5r4">
+                    <h3>400</h3>
+                </td>
+            </tr>
+            <tr>
+                <td id="c1r5">
+                    <h3>500</h3>
+                </td>
+                <td id="c2r5">
+                    <h3>500</h3>
+                </td>
+                <td id="c3r5">
+                    <h3>500</h3>
+                </td>
+                <td id="c4r5">
+                    <h3>500</h3>
+                </td>
+                <td id="c5r5">
+                    <h3>500</h3>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-			<label>Teams</label>
-			<input type="button" id="add" value="add" />
-            <div id="teams"></div>
+    <div id="options">
+        <h1 id="title"></h1>
 
-			<label>Game data</label>
-			<input type="file" id="fileinput">
-			<input class="submit" type="button" id="submit" value="Start" onclick="game.init()" />
-			<div class="clear"></div>
-		</div>
+        <label>Teams</label>
+        <input type="button" id="add" value="add" />
+        <div id="teams"></div>
 
-		<div id="prompt">
-			<h2 id="answer"></h2>
-			<p><span id="correct-response"><a href="javascript:prompt.showQuestion()">Correct Response</a> &nbsp;&nbsp;&nbsp;&nbsp; </span><a href="javascript:prompt.hide()">Continue</a></p>
-			<h2 id="question"></h2>
-		</div>
+        <label>Game data</label>
+        <input type="file" id="fileinput">
+        <input class="submit" type="button" id="submit" value="Start" onclick="game.init()" />
+        <div class="clear"></div>
+    </div>
 
-        <div id="daily">
-            <div class="huge">Daily double!</div>
-            <label>Wetteinsatz</label>
-            <input type="number" step="100" value="100" id="bet">
-            <input type="button" value="bet" id="bet_submit">
-        </div>
+    <div id="prompt">
+        <h2 id="answer"></h2>
+        <p><span id="correct-response"><a href="javascript:prompt.showQuestion()">Correct Response</a> &nbsp;&nbsp;&nbsp;&nbsp; </span><a href="javascript:prompt.hide()">Continue</a>
+        </p>
+        <h2 id="question"></h2>
+    </div>
 
-		<div id="stats"></div>
-    </body>
+    <div id="daily">
+        <div class="huge">Daily double!</div>
+        <label>Wetteinsatz</label>
+        <input type="number" step="100" value="100" id="bet">
+        <input type="button" value="bet" id="bet_submit">
+    </div>
+
+    <div id="stats"></div>
+</body>
+
 </html>

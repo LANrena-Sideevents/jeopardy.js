@@ -1,5 +1,5 @@
 var game = {}
-game.init = function() {
+game.init = function () {
     if (game.gamedata == null) return;
 
     $('#game').fadeIn(1000);
@@ -7,7 +7,7 @@ game.init = function() {
     $('#stats').show();
 
     game.teams = [];
-    $(".team").each(function() {
+    $(".team").each(function () {
         game.teams.push({
             "name": $(this).val(),
             "points": 0
@@ -17,80 +17,78 @@ game.init = function() {
     game.current_points = 0;
 }
 
-game.createScoreboard = function() {
-	var content = "<table cellspacing=10><tbody><tr>";
-	for(var i = 0; i < game.teams.length; i++) {
-		content += "<th><h3>" + game.teams[i]["name"] + "</h3></th>";
-	}
-	content += "</tr><tr>";
-	for(var i = 0; i < game.teams.length; i++) {
-		content += "<td><h3 id='team" + i +"'>0</h3>"
-            + "<input class='add-points' onclick='game.addPoints(" + i + ")' value='+' type='button' />"
-            + "<input class='subtract-points' onclick='game.subtractPoints(" + i + ")' type='button' value='-' /></td>";
-	}
-	content += "</tr></tbody></table>";
-	$('#stats').html(content);
+game.createScoreboard = function () {
+    var content = "<table cellspacing=10><tbody><tr>";
+    for (var i = 0; i < game.teams.length; i++) {
+        content += "<th><h3>" + game.teams[i]["name"] + "</h3></th>";
+    }
+    content += "</tr><tr>";
+    for (var i = 0; i < game.teams.length; i++) {
+        content += "<td><h3 id='team" + i + "'>0</h3><input class='add-points' onclick='game.addPoints(" + i + ")' value='+' type='button' /><input class='subtract-points' onclick='game.subtractPoints(" + i + ")' type='button' value='-' /></td>";
+    }
+    content += "</tr></tbody></table>";
+    $('#stats').html(content);
 }
 
-game.addPoints = function(team) {
-	game.updatePoints(team, game.current_points);
+game.addPoints = function (team) {
+    game.updatePoints(team, game.current_points);
 }
 
-game.subtractPoints = function(team) {
-	var points = 0-game.current_points;
-	game.updatePoints(team, points);
+game.subtractPoints = function (team) {
+    var points = 0 - game.current_points;
+    game.updatePoints(team, points);
 }
 
 game.updatePoints = function (team, diff) {
     game.teams[team]['points'] += diff;
 
     $('#team' + team).html(game.teams[team]['points']);
-	$('#' + game.current_questionID).addClass("dirty")
-	    .unbind('mouseover')
-	    .unbind('mouseout');
+    $('#' + game.current_questionID).addClass("dirty")
+        .unbind('mouseover')
+        .unbind('mouseout');
 
     game.current_points = 0;
 }
 
-game.loadFile = function(onload) {
+game.loadFile = function (onload) {
     if (typeof window.FileReader !== 'function') {
-      return;
+        return;
     }
 
     var input = document.getElementById('fileinput');
     if (input && input.files && input.files[0]) {
-      var fr = new FileReader();
-      fr.onload = onload;
-      fr.readAsText(input.files[0]);
+        var fr = new FileReader();
+        fr.onload = onload;
+        fr.readAsText(input.files[0]);
     }
 }
 
-$(document).ready(function() {
-    $('tbody tr td').each(function() {
+$(document).ready(function () {
+    $('tbody tr td').each(function () {
         $(this).addClass('cell')
-               .addClass('clean')
-               .click(function() {
-            prompt.show($(this));
-        });
+            .addClass('clean')
+            .click(function () {
+                prompt.show($(this));
+            });
     });
 
-	$('textarea.edit').focus(function(){
-		$(this).addClass('active');
-		var val = $(this).val();
-		if(val == "Enter Category" || val == "Enter Title")
-			this.select();
-	}).blur(function(){
-		$(this).removeClass('active');
-	}).autogrow();
+    $('textarea.edit').focus(function () {
+        $(this).addClass('active');
+        var val = $(this).val();
+        if (val == "Enter Category" || val == "Enter Title")
+            this.select();
+    }).blur(function () {
+        $(this).removeClass('active');
+    }).autogrow();
 
-	$('.clean').mouseover(function(){
-		$(this).addClass('ie-hack')
-	}).mouseout(function(){
-		$(this).removeClass('ie-hack')
-	})
+    $('.clean').mouseover(function () {
+        $(this).addClass('ie-hack')
+    }).mouseout(function () {
+        $(this).removeClass('ie-hack')
+    })
 
     $('#fileinput').change(function () {
-        game.loadFile(function(e) {
+        game.loadFile(function (e) {
             var data = $.parseJSON(e.target.result);
             $('#title').html(data["name"]);
             $('#gametitle').html(data["name"]);
@@ -103,19 +101,19 @@ $(document).ready(function() {
         });
     });
 
-    $("#add").click(function() {
+    $("#add").click(function () {
         $("<input type=\"text\" name=\"team[]\" class=\"team\" />").appendTo("#teams");
     });
 });
 
 var prompt = {}
-prompt.show = function(field) {
-	game.current_points = parseInt(field.find('h3').text());
-	game.current_questionID = field.attr("id");
+prompt.show = function (field) {
+    game.current_points = parseInt(field.find('h3').text());
+    game.current_questionID = field.attr("id");
     var column = game.current_questionID.substring(0, 2);
     var dataset = game.gamedata[column][game.current_questionID];
 
-	$('#game').hide();
+    $('#game').hide();
 
     if (dataset.daily) {
         if (game.points_bet) {
@@ -130,17 +128,17 @@ prompt.show = function(field) {
     var question = prompt.loadImage(dataset['question']);
     var answer = prompt.loadImage(dataset['answer']);
 
-	$('#question').hide();
-	$('#prompt').fadeIn(1000);
-	$('#answer').html(question);
-	$('#question').html(answer);
-	if($('#question').html().length == 0)
-		$('#correct-response').hide();
-	else
-		$('#correct-response').show();
+    $('#question').hide();
+    $('#prompt').fadeIn(1000);
+    $('#answer').html(question);
+    $('#question').html(answer);
+    if ($('#question').html().length == 0)
+        $('#correct-response').hide();
+    else
+        $('#correct-response').show();
 }
 
-prompt.loadImage = function(image) {
+prompt.loadImage = function (image) {
     var prefix = game.gamedata['directory'];
     if (image.substring(0, 6) == "image:") {
         return "<img src=\"data/" + prefix + "/" + image.substring(6) + "\">";
@@ -148,21 +146,21 @@ prompt.loadImage = function(image) {
     return image;
 }
 
-prompt.hide = function() {
-	$('#prompt').hide();
-	$('#game').show();
+prompt.hide = function () {
+    $('#prompt').hide();
+    $('#game').show();
 }
 
-prompt.showQuestion = function() {
-	$('#question').fadeIn(1000)
+prompt.showQuestion = function () {
+    $('#question').fadeIn(1000)
 }
 
 var daily = {}
-daily.show = function(field) {
+daily.show = function (field) {
     $('#prompt').hide();
     $('#daily').show();
 
-    $('#bet_submit').click(function() {
+    $('#bet_submit').click(function () {
         game.points_bet = $("#bet").val();
         game.current_points = game.points_bet;
         prompt.show(field);
