@@ -94,20 +94,6 @@ $(document).ready(function() {
     });
 });
 
-var modal = {}
-modal.show = function(questionID) {
-	modal.activeID = questionID;
-	$('#question').val($('#' + questionID).val());
-	$('#answer').val($('#a' + questionID).val());
-	$('#modal').modal({"overlayClose" : true});
-	$('#' + questionID).addClass("dirty").removeClass("clean")
-}
-
-modal.save = function() {
-	$('#' + modal.activeID).val($('#question').val())
-	$('#a' + modal.activeID).val($('#answer').val())
-}
-
 var prompt = {}
 prompt.show = function(field) {
 	game.current_points = parseInt(field.find('h3').text());
