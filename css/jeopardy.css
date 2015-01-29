@@ -1,0 +1,24 @@
+body, #stats {
+    background: #7f7f7f;
+}
+
+#options {
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+}
+
+input.add-points, input.subtract-points {
+    background: transparent;
+}
+
+#game tbody td, #game thead th {
+    border: 6px solid #000;
+    border-bottom-width: 3px;
+    border-top-width: 3px;
+    color: #ffc90e;
+}
+
+#game thead, #game thead {
+    background: #7f7f7f;
+}
