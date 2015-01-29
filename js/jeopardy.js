@@ -40,6 +40,8 @@ game.updatePoints = function (team, diff) {
 	$('#' + game.current_questionID).addClass("dirty")
 	    .unbind('mouseover')
 	    .unbind('mouseout');
+
+    game.current_points = 0;
 }
 
 game.loadFile = function(onload) {
