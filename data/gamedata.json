@@ -3,7 +3,7 @@
   "c1": {
     "name": "Kat 1",
     "c1r1": { "question": "image:question", "answer": "answer2" },
-    "c1r2": { "question": "question", "answer": "answer" },
+    "c1r2": { "question": "question", "answer": "answer1" },
     "c1r3": { "question": "question", "answer": "answer" },
     "c1r4": { "question": "question", "answer": "answer" },
     "c1r5": { "question": "question", "answer": "answer" }
