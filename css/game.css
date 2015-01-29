@@ -223,7 +223,7 @@ input.subtract-points {
 	display:inline;
 }
 
-#prompt {
+#prompt, #daily {
 	display:none;
 	height:100%;
 	width:100%;
@@ -244,4 +244,12 @@ input.subtract-points {
 
 #simplemodal-overlay {
 	background-color:#000;
+}
+
+#daily input{
+    display:inline;
+}
+
+.huge {
+    font-size: 250pt;
 }

@@ -114,11 +114,23 @@ prompt.show = function(field) {
 	game.current_questionID = field.attr("id");
     var column = game.current_questionID.substring(0, 2);
     var dataset = game.gamedata[column][game.current_questionID];
+
+	$('#game').hide();
+
+    if (dataset.daily) {
+        if (game.points_bet) {
+            game.current_points = parseInt(game.points_bet);
+            game.points_bet = null;
+        } else {
+            daily.show(field);
+            return;
+        }
+    }
+
     var question = prompt.loadImage(dataset['question']);
     var answer = prompt.loadImage(dataset['answer']);
 
 	$('#question').hide();
-	$('#game').hide();
 	$('#prompt').fadeIn(1000);
 	$('#answer').html(question);
 	$('#question').html(answer);
@@ -143,4 +155,19 @@ prompt.hide = function() {
 
 prompt.showQuestion = function() {
 	$('#question').fadeIn(1000)
+}
+
+var daily = {}
+daily.show = function(field) {
+    $('#prompt').hide();
+    $('#daily').show();
+
+    $('#daily').find("input").each(function() {
+        $(this).click(function() {
+            game.points_bet = $(this).val();
+            game.current_points = game.points_bet;
+            prompt.show(field);
+            $('#daily').hide();
+        });
+    });
 }
