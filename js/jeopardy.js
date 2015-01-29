@@ -94,6 +94,10 @@ $(document).ready(function() {
             game.gamedata = data;
         });
     });
+
+    $("#add").click(function() {
+        $("<input type=\"text\" name=\"team[]\" class=\"team\" />").appendTo("#teams");
+    });
 });
 
 var prompt = {}
