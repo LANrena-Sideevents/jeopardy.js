@@ -1,5 +1,6 @@
 {
   "name": "LANrena Jeopardy",
+  "directory": "game1",
   "c1": {
     "name": "Kat 1",
     "c1r1": { "question": "image:question", "answer": "answer2" },

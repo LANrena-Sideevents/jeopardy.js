@@ -120,16 +120,17 @@ prompt.show = function(field) {
 	game.current_points = parseInt(field.find('h3').text());
 	game.current_questionID = field.attr("id");
     var column = game.current_questionID.substring(0, 2);
+    var prefix = game.gamedata['directory'];
     var dataset = game.gamedata[column][game.current_questionID];
 
     var question = dataset['question'];
     if (question.substring(0, 6) == "image:") {
-        question = "<img src=\"" + question.substring(6) + "\">";
+        question = "<img src=\"data/" + prefix + "/" + question.substring(6) + "\">";
     }
 
     var answer = dataset['answer'];
     if (answer.substring(0, 6) == "image:") {
-        answer = "<img src=\"" + answer.substring(6) + "\">";
+        answer = "<img src=\"data/" + prefix + "/" + answer.substring(6) + "\">";
     }
 
 	$('#question').hide();
