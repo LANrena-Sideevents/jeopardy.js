@@ -15,7 +15,7 @@ HTML5 Jeopardy Anwendung für [LANrena 7](http://www.lanrena.de/party/?do=event&
 # Datenformat
 Die Anwendung verwendet JSON als Datenformat ([Beispiel](https://gist.github.com/janseeger/28d3d7d019e49ed32f14))
 
-# Lizensen
+# Lizenzen
 
 * Jeopardy: [ASL 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 * jQuery 2.1.3: [MIT License](http://opensource.org/licenses/MIT)
