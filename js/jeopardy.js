@@ -123,7 +123,7 @@ prompt.show = function (field) {
 
     $('#game').hide();
 
-    if (dataset.daily) {
+    if ("daily" in dataset) {
         if (game.points_bet) {
             game.current_points = parseInt(game.points_bet);
             game.points_bet = null;
@@ -175,3 +175,4 @@ daily.show = function (field) {
         $('#daily').hide();
     });
 }
+
