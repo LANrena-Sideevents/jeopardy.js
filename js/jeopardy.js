@@ -92,9 +92,10 @@ $(document).ready(function () {
             var data = $.parseJSON(e.target.result);
             $('#title').html(data["name"]);
             $('#gametitle').html(data["name"]);
+			var i = 0;
             $('thead').find('th:not(#gametitle)').each(function () {
                 var id = $(this).attr("id");
-                var label = data[id]["name"];
+                var label = data["data"][i++]["name"];
                 $(this).html(label)
             });
             game.gamedata = data;
@@ -106,12 +107,19 @@ $(document).ready(function () {
     });
 });
 
+game.extractFromId = function(identifier, index) {
+	var regexp = /c([0-9])r([0-9])/g;
+	var retval = regexp.exec(identifier);
+	return retval[index];
+}
+
 var prompt = {}
 prompt.show = function (field) {
     game.current_points = parseInt(field.find('h3').text());
     game.current_questionID = field.attr("id");
-    var column = game.current_questionID.substring(0, 2);
-    var dataset = game.gamedata[column][game.current_questionID];
+    var column = game.extractFromId(field.attr("id"), 1) -1;
+    var row = game.extractFromId(field.attr("id"), 2) -1;
+    var dataset = game.gamedata["data"][column]["data"][row];
 
     $('#game').hide();
 
