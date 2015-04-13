@@ -86,7 +86,11 @@ textarea#title {
 #game tbody td {
 	cursor:pointer;
 	height:100px;
-        border:3px solid #2a3698;
+    border:3px solid #2a3698;
+}
+
+#game tbody td img {
+    height: 100%;
 }
 
 #game tbody td.ie-hack {
@@ -199,31 +203,30 @@ textarea#title {
 	border-bottom:1px solid black;
 }
 
-input.add-points {
-	color:#66cc33;
-	font-family:"Courier New", Courier, monospace;
-	font-weight:bold;
+input.add-points, input.subtract-points, input.adjust-points {
+    font-family:"Courier New", Courier, monospace;
+    font-weight:bold;
 	font-size:20px;
 	cursor:pointer;
-	padding:0px;
-	background-color:#FFFFFF;
+    background-color:#FFFFFF;
 	border:none;
 	display:inline;
+    padding:0px;
+}
+    
+input.add-points {
+	color:#66cc33;
 }
 
 input.subtract-points {
 	color:#ff0000;
-	font-family:"Courier New", Courier, monospace;
-	font-weight:bold;
-	font-size:20px;
-	cursor:pointer;	
-	padding:0px;
-	background-color:#FFFFFF;
-	border:none;
-	display:inline;
 }
 
-#prompt, #daily {
+input.adjust-points {
+	color:#0000ff;
+}
+
+#prompter, #daily {
 	display:none;
 	height:100%;
 	width:100%;
@@ -232,13 +235,13 @@ input.subtract-points {
 	text-align:center;
 }
 
-#prompt a:link, #prompt a:visited, #prompt a:hover {
+#prompter a:link, #prompter a:visited, #prompter a:hover {
 	color:#fff;
 	font-size:18px;
 	text-decoration:underline;
 }
 
-#prompt a:hover {
+#prompter a:hover {
 	text-decoration:none;
 }
 

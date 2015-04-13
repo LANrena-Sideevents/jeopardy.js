@@ -3,7 +3,7 @@
 
 var game = {};
 var daily = {};
-var prompt = {};
+var prompter = {};
 
 game.init = function () {
     'use strict';
@@ -38,7 +38,9 @@ game.createScoreboard = function () {
 
     content += "</tr><tr>";
     for (i = 0; i < game.teams.length; i = i + 1) {
-        content += "<td><h3 id='team" + i + "'>0</h3><input class='add-points' onclick='game.addPoints(" + i + ")' value='+' type='button' /><input class='subtract-points' onclick='game.subtractPoints(" + i + ")' type='button' value='-' /></td>";
+        content += "<td><h3 id='team" + i + "'>0</h3>";
+        content += "<input class='add-points' onclick='game.addPoints(" + i + ")' value='+' type='button' />";
+        content += "<input class='subtract-points' onclick='game.subtractPoints(" + i + ")' type='button' value='-' /></td>";
     }
 
     content += "</tr></tbody></table>";
@@ -53,7 +55,7 @@ game.continueGame = function () {
         .unbind('mouseout')
         .unbind('click');
     game.current_points = 0;
-    prompt.hide();
+    prompter.hide();
 };
 
 game.addPoints = function (team) {
@@ -95,7 +97,7 @@ game.extractFromId = function (identifier, index) {
     return retval[index];
 };
 
-prompt.show = function (field) {
+prompter.show = function (field) {
     'use strict';
     game.current_points = parseInt(field.find('h3').text(), 10);
     game.current_questionID = field.attr("id");
@@ -116,11 +118,11 @@ prompt.show = function (field) {
         }
     }
 
-    question = prompt.loadImage(dataset.question);
-    answer = prompt.loadImage(dataset.answer);
+    question = prompter.loadImage(dataset.question);
+    answer = prompter.loadImage(dataset.answer);
 
     $('#question').hide();
-    $('#prompt').fadeIn(1000);
+    $('#prompter').fadeIn(1000);
     $('#answer').html(question);
     $('#question').html(answer);
     if ($('#question').html().length === 0) {
@@ -130,7 +132,7 @@ prompt.show = function (field) {
     }
 };
 
-prompt.loadImage = function (image) {
+prompter.loadImage = function (image) {
     'use strict';
     var prefix = game.gamedata.directory;
     if (image.substring(0, 6) === "image:") {
@@ -139,26 +141,26 @@ prompt.loadImage = function (image) {
     return image;
 };
 
-prompt.hide = function () {
+prompter.hide = function () {
     'use strict';
-    $('#prompt').hide();
+    $('#prompter').hide();
     $('#game').show();
 };
 
-prompt.showQuestion = function () {
+prompter.showQuestion = function () {
     'use strict';
     $('#question').fadeIn(1000);
 };
 
 daily.show = function (field) {
     'use strict';
-    $('#prompt').hide();
+    $('#prompter').hide();
     $('#daily').show();
 
     $('#bet_submit').click(function () {
         game.points_bet = $("#bet").val();
         game.current_points = game.points_bet;
-        prompt.show(field);
+        prompter.show(field);
         $('#daily').hide();
     });
 };
@@ -170,7 +172,7 @@ $(document).ready(function () {
             .click(function () {
                 var field = $(this);
                 if (!field.hasClass('dirty')) {
-                    prompt.show(field);
+                    prompter.show(field);
                 }
             });
     });
