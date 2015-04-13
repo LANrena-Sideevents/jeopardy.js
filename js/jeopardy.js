@@ -61,9 +61,11 @@ game.updatePoints = function (team, diff) {
     game.teams[team].points += diff;
 
     $('#team' + team).html(game.teams[team].points);
-    $('#' + game.current_questionID).addClass("dirty")
+    $('#' + game.current_questionID)
+        .addClass("dirty")
         .unbind('mouseover')
-        .unbind('mouseout');
+        .unbind('mouseout')
+        .unbind('click');
 
     game.current_points = 0;
 };
@@ -161,9 +163,11 @@ $(document).ready(function () {
     'use strict';
     $('tbody tr td').each(function () {
         $(this).addClass('cell')
-            .addClass('clean')
             .click(function () {
-                prompt.show($(this));
+                var field = $(this);
+                if (!field.hasClass('dirty')) {
+                    prompt.show(field);
+                }
             });
     });
 
