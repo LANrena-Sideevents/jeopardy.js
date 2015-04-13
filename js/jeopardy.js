@@ -45,6 +45,17 @@ game.createScoreboard = function () {
     $('#stats').html(content);
 };
 
+game.continueGame = function () {
+    'use strict';
+    $('#' + game.current_questionID)
+        .addClass("dirty")
+        .unbind('mouseover')
+        .unbind('mouseout')
+        .unbind('click');
+    game.current_points = 0;
+    prompt.hide();
+};
+
 game.addPoints = function (team) {
     'use strict';
     game.updatePoints(team, game.current_points);
@@ -59,15 +70,8 @@ game.subtractPoints = function (team) {
 game.updatePoints = function (team, diff) {
     'use strict';
     game.teams[team].points += diff;
-
     $('#team' + team).html(game.teams[team].points);
-    $('#' + game.current_questionID)
-        .addClass("dirty")
-        .unbind('mouseover')
-        .unbind('mouseout')
-        .unbind('click');
-
-    game.current_points = 0;
+    game.continueGame();
 };
 
 game.loadFile = function (onload) {
@@ -144,10 +148,6 @@ prompt.hide = function () {
 prompt.showQuestion = function () {
     'use strict';
     $('#question').fadeIn(1000);
-};
-
-prompt.continueGame = function () {
-    'use strict';
 };
 
 daily.show = function (field) {
