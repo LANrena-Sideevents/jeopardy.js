@@ -146,6 +146,10 @@ prompt.showQuestion = function () {
     $('#question').fadeIn(1000);
 };
 
+prompt.continueGame = function () {
+    'use strict';
+};
+
 daily.show = function (field) {
     'use strict';
     $('#prompt').hide();
