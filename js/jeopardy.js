@@ -26,6 +26,12 @@ game.init = function () {
     game.current_points = 0;
 };
 
+game.adjustPoints = function (team) {
+    'use strict';
+    var amount = window.prompt("Amount:", "100");
+    game.updatePoints(team, parseInt(amount, 10));
+};
+
 game.createScoreboard = function () {
     'use strict';
 
@@ -40,6 +46,7 @@ game.createScoreboard = function () {
     for (i = 0; i < game.teams.length; i = i + 1) {
         content += "<td><h3 id='team" + i + "'>0</h3>";
         content += "<input class='add-points' onclick='game.addPoints(" + i + ")' value='+' type='button' />";
+        content += "<input class='adjust-points' onclick='game.adjustPoints(" + i + ")' value='#' type='button' />";
         content += "<input class='subtract-points' onclick='game.subtractPoints(" + i + ")' type='button' value='-' /></td>";
     }
 
@@ -61,19 +68,20 @@ game.continueGame = function () {
 game.addPoints = function (team) {
     'use strict';
     game.updatePoints(team, game.current_points);
+    game.continueGame();
 };
 
 game.subtractPoints = function (team) {
     'use strict';
     var points = -game.current_points;
     game.updatePoints(team, points);
+    game.continueGame();
 };
 
 game.updatePoints = function (team, diff) {
     'use strict';
     game.teams[team].points += diff;
     $('#team' + team).html(game.teams[team].points);
-    game.continueGame();
 };
 
 game.loadFile = function (onload) {

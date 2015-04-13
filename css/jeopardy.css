@@ -8,7 +8,7 @@ body, #stats {
     border-radius: 8px;
 }
 
-input.add-points, input.subtract-points {
+input.add-points, input.subtract-points, input.adjust-points {
     background: transparent;
 }
 
@@ -17,6 +17,7 @@ input.add-points, input.subtract-points {
     border-bottom-width: 3px;
     border-top-width: 3px;
     color: #ffc90e;
+    white-space: nowrap;
 }
 
 #game thead, #game thead {
